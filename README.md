@@ -1,15 +1,18 @@
-# ocaml-stm-webpage
+# Software Transactional Memory for Multicore OCaml
 
-We will implement and compare two software transactional memory (STM) systems for
-Multicore OCaml: a lazy versioning + optimistic conflict detection system, partially modeled after
-the TL2 algorithm, and an eager versioning + pessimistic conflict detection system modeled
-after LogTM. We will build transactional data structures on top of each, benchmark both
-against Domainslib mutex-based locks under varying contention, and perform a detailed
-analysis of throughput, abort rates, and synchronization overhead to understand which
-design wins and under what conditions.
+We implemented two software transactional memory (STM) systems for Multicore OCaml from
+scratch and evaluated them against the production kcas library and a standard-library Mutex
+baseline on the GHC lab machines. We benchmarked the systems across 1 to 8 OCaml domains on
+four transactional data structures: a shared counter, a hash map, a linked list, and a bank account.
+Both STM designs trailed kcas and Mutex by a significant margin on high-contention workloads,
+and EP-STM exhibited substantially higher abort rates than LO-STM at moderate domain counts,
+but we observed relative throughput depends heavily on the read/write ratio.
 
 ## Project Proposal
 [PDF](proposal.pdf)
 
 ## Milestone Report
 [PDF](milestone_report.pdf)
+
+## Final Report
+[PDF](final_report.pdf)
